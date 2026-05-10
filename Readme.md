@@ -204,8 +204,8 @@ Instead of using numbers or strings, use meaningful constant names.
 | Widening Casting (Implicit)  | Smaller type → Larger type automatically | `int` → `double` |
 | Narrowing Casting (Explicit) | Larger type → Smaller type manually      | `double` → `int` |
 
-> **Widening Casting:** `byte → short → int → long → float → double`
-> **Narrowing Casting:** `double → float → long → int → short → byte`
+> - **Widening Casting:** `byte → short → int → long → float → double`
+> - **Narrowing Casting:** `double → float → long → int → short → byte`
 
 ##### Type Casting Table
 
