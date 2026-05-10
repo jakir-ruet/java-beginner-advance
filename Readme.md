@@ -218,6 +218,17 @@ Instead of using numbers or strings, use meaningful constant names.
 | `long` → `short` | Manual       | Narrowing    |
 | `int` → `byte`   | Manual       | Narrowing    |
 
+#### Recursion
+
+It's when a method calls itself to solve a problem by breaking it into smaller, similar sub-problems.
+
+##### Two Essential Parts of Recursion
+
+| Part               | Purpose                                                  | Example                        |
+| ------------------ | -------------------------------------------------------- | ------------------------------ |
+| **Base Case**      | Stops recursion by defining the simplest case            | `if (n == 0) return 1;`        |
+| **Recursive Case** | Breaks problem into smaller subproblems and calls itself | `return n * factorial(n - 1);` |
+
 ## With Regards, `Jakir`
 
 [![LinkedIn][linkedin-shield-jakir]][linkedin-url-jakir]
