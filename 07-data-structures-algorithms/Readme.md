@@ -31,6 +31,10 @@ Java programs run inside `JVM (Java Virtual Machine)` and JVM is responsible for
 
 ![JVM Memory Architeccture](/img/jvm-memory-architeccture.png)
 
+### JVM Memory Architeccture
+
+![JVM Memory Architeccture](/img/stack-heap.png)
+
 ### Memory Area Details
 
 This section defines the primary purpose of each memory segment within the JVM.
