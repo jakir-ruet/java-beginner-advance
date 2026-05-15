@@ -25,3 +25,33 @@
 | Hides       | Variables (data)         | Logic (implementation)     |
 | Purpose     | Security + control       | Simplicity + design        |
 | Level       | Code level               | Design level               |
+
+### What changed conceptually?
+
+1. Before (Abstract Class)
+   - Shared method inside parent class
+   - Tight relationship (is-a base class)
+
+**Should See**
+
+```txt
+Payment Processing...
+Paid using Credit Card
+-----------
+
+Payment Processing...
+Paid using Paypal
+```
+
+2. Now (Interface)
+   - Only defines behavior
+   - No shared logic inside contract
+   - More flexible design
+
+**Should See**
+
+```txt
+Paying with credit card
+-------------
+Paying with PayPal
+```
