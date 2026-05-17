@@ -23,31 +23,25 @@ public class Main {
 
             switch (choice) {
 
-                case 1:
-                    createFile(fileName);
-                    break;
+                case 1 -> createFile(fileName);
 
-                case 2:
+                case 2 -> {
                     System.out.print("Enter text to write: ");
                     String text = sc.nextLine();
                     writeFile(fileName, text);
-                    break;
+                }
 
-                case 3:
-                    readFile(fileName);
-                    break;
+                case 3 -> readFile(fileName);
 
-                case 4:
-                    deleteFile(fileName);
-                    break;
+                case 4 -> deleteFile(fileName);
 
-                case 5:
+                case 5 -> {
                     System.out.println("Exiting...");
                     sc.close();
                     return;
+                }
 
-                default:
-                    System.out.println("Invalid choice!");
+                default -> System.out.println("Invalid choice!");
             }
         }
     }
@@ -79,6 +73,7 @@ public class Main {
     }
 
     // Read File
+    @SuppressWarnings("ConvertToTryWithResources")
     public static void readFile(String fileName) {
         try {
             File file = new File(fileName);
