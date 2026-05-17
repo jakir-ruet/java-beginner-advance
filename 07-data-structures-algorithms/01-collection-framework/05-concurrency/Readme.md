@@ -100,3 +100,10 @@ Decides WHICH recipe          Assigns to WHICH stove
 | Thread      | Small unit of execution inside a process                       |
 | Concurrency | Multiple threads running together                              |
 | Parallelism | Multiple tasks running literally at the same time (multi-core) |
+
+### Concurrency vs Parallelism
+
+| Concept     | Meaning                                       |
+| ----------- | --------------------------------------------- |
+| Concurrency | Tasks appear simultaneous                     |
+| Parallelism | Tasks run truly at same time (multi-core CPU) |
