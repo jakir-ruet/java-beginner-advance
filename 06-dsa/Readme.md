@@ -31,7 +31,21 @@ Java programs run inside `JVM (Java Virtual Machine)` and JVM is responsible for
 
 ![JVM Memory Architeccture](/img/jvm-memory-architeccture.png)
 
-### JVM Memory Architeccture
+### Heap Memory Structure
+
+Java heap is typically divided into:
+
+1. Young Generation
+   - New objects are created here
+   - Frequent GC happens here (Minor GC)
+   - Subdivided into:
+   - Eden Space
+   - Survivor Spaces (S0, S1)
+2. Old Generation (Tenured)
+   - Long-lived objects move here
+   - Less frequent GC (Major GC)
+3. Metaspace (Java 8+)
+   - Stores class metadata (replaced PermGen)
 
 ![JVM Memory Architeccture](/img/stack-heap.png)
 
