@@ -11,8 +11,8 @@ A running program with its own isolated memory space. An instance of a program i
 - Takes more resources to create than threads
 
 ```bash
-chrome.exe (PID 1234) - Process
-word.exe (PID 5678) - Process
+chrome.exe 	(PID 1234) - Process
+word.exe 	(PID 5678) - Process
 spotify.exe (PID 9012) - Process
 ```
 
@@ -20,9 +20,37 @@ spotify.exe (PID 9012) - Process
 
 A process is a running program with its own memory space. A thread is a `lightweight` unit inside a process that shares that memory space with other threads in the same process.
 
-### OS Scheduler
+![Threading-Architecture](/img/threading-architecture.jpg)
 
-The kernel component responsible for allocating CPU time (hardware threads) to runnable software threads, using algorithms like round-robin, priority-based, or fair scheduling.
+### Types of Thread
+
+In Java (especially Java SE 21), threads are mainly of two types:
+
+- Physical (Platform) Threads
+- Virtual Threads
+
+Both are used for concurrency, but they work very differently.
+
+### Physical vs Virtual Thread
+
+| Feature                | Physical (Platform) Threads      | Virtual Threads (Java 21)                     |
+| ---------------------- | -------------------------------- | --------------------------------------------- |
+| Definition             | OS-managed threads used by JVM   | JVM-managed lightweight threads               |
+| Managed by             | Operating System (Kernel)        | JVM (Project Loom)                            |
+| Introduced in Java     | Since early versions             | Java 21                                       |
+| Weight                 | Heavy                            | Very lightweight                              |
+| Creation cost          | High                             | Very low                                      |
+| Memory usage           | High (MB per thread stack)       | Very low (shared stack management)            |
+| Scalability            | Limited (thousands)              | Very high (millions possible)                 |
+| Execution mapping      | 1:1 with OS threads              | Many-to-few (multiplexed on platform threads) |
+| Scheduling             | OS scheduler                     | JVM scheduler                                 |
+| Blocking behavior      | Blocks OS thread                 | JVM parks/unblocks efficiently                |
+| Best suited for        | CPU-intensive tasks              | I/O-heavy tasks (API, DB, network)            |
+| Context switching cost | High                             | Very low                                      |
+| Performance bottleneck | Thread exhaustion                | Rare (designed for scale)                     |
+| Example use case       | Image processing, computations   | REST APIs, microservices, database calls      |
+| Java API example       | `new Thread()`                   | `Thread.startVirtualThread()`                 |
+| Executor example       | `Executors.newFixedThreadPool()` | `Executors.newVirtualThreadPerTaskExecutor()` |
 
 ```bash
 YOUR COMPUTER = A GIANT RESTAURANT KITCHEN
@@ -57,8 +85,8 @@ YOUR COMPUTER = A GIANT RESTAURANT KITCHEN
 
 ```bash
 HIERARCHY:
-					YOUR COMPUTER
-							│
+						YOUR COMPUTER
+							  │
 			┌─────────────┴─────────────┐
 			│                           │
 	HARDWARE                      SOFTWARE
@@ -68,19 +96,19 @@ HIERARCHY:
 			│                   3,413 Threads (Recipes)
 			│                           │
 			└─────────────┬─────────────┘
-							│
+							  │
 					OS SCHEDULER
 						(Head Chef)
-							│
+							  │
 			┌─────────────┴─────────────┐
 			│                           │
 Decides WHICH recipe          Assigns to WHICH stove
 (software thread)             (hardware thread)
 			│                           │
 			└─────────────┬─────────────┘
-							│
-					EXECUTION
-					(Cooking!)
+							  │
+						EXECUTION
+						(Cooking!)
 ```
 
 > **Threads** > The fundamental unit of concurrency in Java.
@@ -101,9 +129,6 @@ Decides WHICH recipe          Assigns to WHICH stove
 | Concurrency | Multiple threads running together                              |
 | Parallelism | Multiple tasks running literally at the same time (multi-core) |
 
-### Concurrency vs Parallelism
+### OS Scheduler
 
-| Concept     | Meaning                                       |
-| ----------- | --------------------------------------------- |
-| Concurrency | Tasks appear simultaneous                     |
-| Parallelism | Tasks run truly at same time (multi-core CPU) |
+The kernel component responsible for allocating CPU time (hardware threads) to runnable software threads, using algorithms like round-robin, priority-based, or fair scheduling.

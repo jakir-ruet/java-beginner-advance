@@ -4,6 +4,17 @@
 
 Java is a high-level, general-purpose, memory-safe, object-oriented programming language. It is intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
 
+### Java SE 21?
+
+Java SE 21 is a Long-Term Support (LTS) release of Java. It is one of the most important versions because many enterprise applications, cloud-native systems, banking software, backend APIs, Android tools, and big-data platforms rely on Java. Java SE 21 introduces important modern features like:
+
+- Virtual Threads
+- Pattern Matching
+- Record Patterns
+- Sequenced Collections
+- Structured Concurrency
+- Scoped Values
+
 #### Literals
 
 These are fixed values that appear directly in the code. They don't change.
@@ -17,6 +28,10 @@ These are fixed values that appear directly in the code. They don't change.
 | Character Literals | Single character inside single quotes         | `'A'`, `'9'`, `'$'`     |
 | String Literals    | Sequence of characters inside double quotes   | `"Hello"`, `"Java"`     |
 | Boolean Literals   | Logical values                                | `true`, `false`         |
+
+### Collections Hierarchy
+
+![Collections Hierarchy](/img/collections-framework.jpg)
 
 #### Primitive Data Types
 
