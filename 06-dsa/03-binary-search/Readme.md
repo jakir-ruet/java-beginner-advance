@@ -1,5 +1,5 @@
-### Binary
+### Binary Search
 
-Binary search is a way to find a value in a sorted array by repeatedly cutting the search space in half.
+Binary search is a way to find a value in a sorted array by repeatedly cutting the search space in half. Instead of checking every element one by one, it quickly eliminates half of the data each step.
 
-Instead of checking every element one by one, it quickly eliminates half of the data each step.
+![Binary Search](/img/binary-search.jpg)
