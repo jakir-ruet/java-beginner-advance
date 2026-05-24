@@ -138,9 +138,7 @@ curl -I https://container-registry.oracle.com/v2/
 docker exec -it oracle-xe sqlplus system/Sql054003@localhost:1521/XEPDB1
 ```
 
-```bash
 [Install SQLDeveloper](https://www.oracle.com/database/sqldeveloper/vscode/)
-```
 
 | Setting  | Value     |
 | -------- | --------- |
