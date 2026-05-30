@@ -1,4 +1,4 @@
-### Error Handling
+### Exceptions Handling
 
 Error handling in Java is mainly done using `exceptions`. An exception is an event that disrupts the normal flow of a program. Java provides a structured mechanism using `try`, `catch`, `finally`, `throw`, and `throws`.
 
