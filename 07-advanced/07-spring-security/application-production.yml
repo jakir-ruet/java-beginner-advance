@@ -1,0 +1,37 @@
+# application-production.yml
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/secure_db
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 20
+  jpa:
+    show-sql: false
+  redis:
+    host: redis
+
+server:
+  port: 8080
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: /var/log/tomcat
+    remoteip:
+      protocol-header: X-Forwarded-Proto
+      remote-ip-header: X-Forwarded-For
+
+logging:
+  level:
+    com.example: WARN
+    org.springframework.security: WARN
+  file:
+    path: /var/log/secure-api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
