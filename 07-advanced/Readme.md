@@ -1,18 +1,10 @@
-### Master Spring Boot 3 & Spring Framework 6 with Java
-
-Here we learn to become Java Spring Boot Full Stack Developer.
-
-- Spring Framework,
-- Spring Boot,
-- Spring Data,
-- Docker &
-- AWS
+### Design Principles
 
 #### Coupling
 
 Coupling means how strongly **two** classes depend on each other.
 
-1. **Tight Coupling (Bad design)** - One class directly creates and depends on another class.
+**1. Tight Coupling (Bad design)** - One class directly creates and depends on another class.
 
 ```bash
 # Pure Java
@@ -38,7 +30,7 @@ class Car {
 > - If Engine changes → Car breaks
 > - Hard to test and maintain
 
-2. **Loose Coupling (Good Design)** - Classes depend on interfaces instead of concrete classes.
+**2. Loose Coupling (Good Design)** - Classes depend on interfaces instead of concrete classes.
 
 - Create Interface
 
@@ -48,7 +40,7 @@ interface Engine {
 }
 ```
 
-- Implement Multiple Engines
+- **Implement Multiple Engines**
 
 ```bash
 class PetrolEngine implements Engine {
@@ -66,7 +58,7 @@ class DieselEngine implements Engine {
 }
 ```
 
-- Inject Dependency (Loose Coupling)
+- **Inject Dependency (Loose Coupling)**
 
 ```bash
 class Car {
@@ -84,56 +76,48 @@ class Car {
 }
 ```
 
-- Usage
+- **Usage Case**
 
 ```bash
 public class Main {
     public static void main(String[] args) {
-
         Engine engine = new PetrolEngine(); // can switch easily
         Car car = new Car(engine);
-
         car.drive();
     }
 }
 ```
 
-**Object-Oriented Design (OOD)**
+**3. Cohesion** measures how closely related the responsibilities and functionalities of a class are. A highly cohesive class has a single, well-defined purpose.
 
-**1. Cohesion** measures how closely related the responsibilities and functionalities of a class are. A highly cohesive class has a single, well-defined purpose.
-
-- High Cohesion (Good) - Only Login-Logout
+- **High Cohesion (Good) - Only Login-Logout**
 
 ```bash
 public class AuthenticationService {
-
     public boolean login(String username, String password) {
         // authentication logic
         return true;
     }
-
     public void logout() {
         // logout logic
     }
 }
 ```
 
-- Low Cohesion (Bad) - Login, Send Email, generate Report & print Invoice.
+- **Low Cohesion (Bad) - Login, Send Email, generate Report & print Invoice.**
 
 ```bash
 public class UserManager {
-
     public void login() {}
-
     public void sendEmail() {}
-
     public void generateReport() {}
-
     public void printInvoice() {}
 }
 ```
 
-**2. Dependency Injection (DI)** It's a design pattern where an object receives its dependencies from an external source instead of creating them internally using new.
+#### Dependency Injection
+
+It's a design pattern where an object receives its dependencies from an external source instead of creating them internally using new.
 
 **Why Spring Boot uses DI** Spring Boot uses DI to:
 
@@ -155,7 +139,6 @@ class Car {
 ```bash
 class Car {
     private Engine engine;
-
     Car(Engine engine) {
         this.engine = engine;
     }
@@ -164,7 +147,95 @@ class Car {
 
 > The dependency (Engine) is “injected” from outside.
 
-**Spring Container** It's the core engine of Spring Framework. It is responsible for:
+**1. Constructor Injection - Recommended**
+
+```bash
+@Service
+class UserService {
+    private final UserRepository repository;  // Immutable (final)
+    private final EmailService emailService;
+
+    // Spring automatically injects dependencies
+    public UserService(UserRepository repository, EmailService emailService) {
+        this.repository = repository;
+        this.emailService = emailService;
+    }
+}
+// ✅ Benefits: Immutable, testable, required dependencies clear
+```
+
+**2. Setter Injection**
+
+```bash
+@Service
+class UserService {
+    private EmailService emailService;  // Optional dependency
+
+    @Autowired  // Optional
+    public void setEmailService(EmailService emailService) {
+        this.emailService = emailService;
+    }
+}
+// ✅ Use for optional dependencies that can be changed at runtime
+```
+
+**3. Field Injection - Avoid**
+
+```bash
+@Service
+class UserService {
+    @Autowired  // Field injection - BAD PRACTICE
+    private UserRepository repository;  // Non-final, hard to test
+}
+// ❌ Problems: Hard to test, breaks encapsulation, null pointer risks
+```
+
+#### Inversion of Control (IoC)
+
+Inversion of Control (IoC) is a software design principle where the control of object creation and dependency management is handed over to a framework instead of being handled manually by the developer.
+
+**Without IoC (Traditional Java)**
+
+```bash
+Engine engine = new PetrolEngine();
+Car car = new Car(engine);
+car.drive();
+```
+
+> **Problems:**
+>
+> - You create objects yourself
+> - You decide dependencies manually
+> - Hard to change implementations
+> - Tight coupling
+
+**With IoC (Spring Way)**
+
+```bash
+@Service
+class CarService {
+    private final EngineService engineService;
+    public CarService(EngineService engineService) {
+        this.engineService = engineService;
+    }
+}
+```
+
+> **Spring does everything:**
+>
+> - Creates objects
+> - Chooses dependencies
+> - Injects them automatically
+
+| Without IoC                 | With IoC                           |
+| --------------------------- | ---------------------------------- |
+| You control object creation | Framework controls object creation |
+| You wire dependencies       | Framework wires dependencies       |
+| Manual lifecycle management | Automatic lifecycle management     |
+
+#### Spring Container
+
+The Spring Container is the core component of the Spring Framework that is responsible for `creating`, `configuring`, `managing`, and `destroying` application objects (beans) and handling their dependencies through Dependency Injection (DI). It's the core engine of Spring Framework. It is responsible for:
 
 - Creating objects
 - Managing objects
@@ -172,76 +243,58 @@ class Car {
 - Controlling object lifecycle
 - Simple meaning:
 
-> It is like a `factory` + `manager` for objects in your application.
+**Analogy**
+
+| Role          | Spring Equivalent    |
+| ------------- | -------------------- |
+| Factory       | Spring Container     |
+| Products      | Beans (objects)      |
+| Assembly line | Dependency Injection |
+| Manager       | ApplicationContext   |
+
+##### Types of Spring Containers
+
+1. BeanFactory - `Basic Container` - **Not used in modern Spring**
+2. ApplicationContext - `Modern Container`
+3. Spring Container Internal Workflow
+
+**1. BeanFactory - `Basic Container` - Not used in modern Spring**
+
+**Features:**
+
+- Old and lightweight
+- Loads beans lazily (on demand)
+- Minimal features
 
 ```bash
-@Service
-public class CarService { }
+BeanFactory factory = new XmlBeanFactory(resource);
 ```
 
-> **Spring Container:**
->
-> - Detects CarService
-> - Creates its object
-> - Keeps it ready in memory
-> - Injects it wherever needed
+**2. ApplicationContext - `Modern Container`**
 
-**Types of Spring Container**
-1. `BeanFactory` (basic, old)
-2. `ApplicationContext` (modern, used in Spring Boot)
+**Features:**
 
-> Spring Boot uses `ApplicationContext`
-
-**Bean** It's an object that is created and managed by the Spring Container.
-
-**Without Spring**
+- Eager bean creation (startup time)
+- Event publishing
+- AOP support
+- Internationalization (i18n)
+- Annotation-based config
 
 ```bash
-CarService car = new CarService();
+ApplicationContext context =
+    new AnnotationConfigApplicationContext(AppConfig.class);
 ```
 
-> You are manually creating object.
+**3. Spring Container Internal Workflow**
 
-**With Spring (Bean)**
+- @Component
+- @Service
+- @Repository
+- @Controller
 
 ```bash
-@Service
-public class CarService { }
+@ComponentScan(basePackages = "com.example")
 ```
-
-> **Now:**
-> - Spring creates CarService object
-> - That object is called a Bean
-
-```bash
-@Service
-class EngineService { }
-
-@Service
-class CarService {
-    private final EngineService engineService;
-
-    public CarService(EngineService engineService) {
-        this.engineService = engineService;
-    }
-}
-```
-
-**What Spring does:**
-- Creates `EngineService` → Bean
-- Creates `CarService` → Bean
-- Injects `EngineService` into CarSe`r`vice
-
-**Real-life analogy** Think of a restaurant kitchen system:
-
-- **Beans = dishes** each prepared item (Pizza, Burger) = Bean
-
-- **Container = kitchen**
-  - Kitchen prepares food
-  - Controls ingredients
-  - Delivers dishes when needed
-
-> You don’t cook yourself → kitchen does it.
 
 **3. Interfaces and Abstraction** Abstraction hides implementation details and exposes only essential behavior. Interface defines a contract that implementing classes must follow.
 
@@ -274,10 +327,3 @@ public class PayPalPayment implements Payment {
     }
 }
 ```
-
-Correct order to learn
-
-1. OOP (Foundation)
-2. SOLID Principles (Design Rules)
-3. OOD (Object-Oriented Design)
-4. Design Patterns (Solutions)
