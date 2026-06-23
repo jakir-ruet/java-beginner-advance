@@ -274,3 +274,10 @@ public class PayPalPayment implements Payment {
     }
 }
 ```
+
+Correct order to learn
+
+1. OOP (Foundation)
+2. SOLID Principles (Design Rules)
+3. OOD (Object-Oriented Design)
+4. Design Patterns (Solutions)
