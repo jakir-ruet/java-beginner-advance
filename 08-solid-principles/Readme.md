@@ -1,6 +1,6 @@
 ### Overview
 
-`S``O``L``I``D` principles are a set of five design principles that help you write clean, maintainable, and scalable object-oriented code in Java (and other OOP languages). They’re especially useful when your projects start growing and you want to avoid messy, tightly coupled code.
+`S` `O` `L` `I` `D` principles are a set of five design principles that help you write clean, maintainable, and scalable object-oriented code in Java (and other OOP languages). They’re especially useful when your projects start growing and you want to avoid messy, tightly coupled code.
 
 **1. S — Single Responsibility Principle (SRP)** A class should have only one reason to change. That means one class should do only one job.
 
