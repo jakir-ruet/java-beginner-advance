@@ -2,6 +2,14 @@
 
 The Java Collection Framework is a unified architecture that provides a set of interfaces, implementations, and algorithms to store, manage, and manipulate groups of objects efficiently.
 
+#### Collection
+
+Collection is the root interface of the Java Collection Framework. It defines the most common methods that all collections should have.
+
+#### Collections
+
+Collections is a utility class that consists exclusively of static methods that operate on or return collections. It contains polymorphic algorithms that work on collections.
+
 ### Collection Framework Tree
 
 ```bash
@@ -118,3 +126,14 @@ The Java Collection Framework is a unified architecture that provides a set of i
 | Queue             | Job processing (Kafka-like)     |
 | BlockingQueue     | Producer-consumer system        |
 | ConcurrentHashMap | Multi-thread cache              |
+
+### Collection vs Collections
+
+| Feature         | `Collection`                                | `Collections`                                        |
+| --------------- | ------------------------------------------- | ---------------------------------------------------- |
+| Type            | Interface                                   | Utility class                                        |
+| Package         | `java.util`                                 | `java.util`                                          |
+| Purpose         | Represents a group of objects               | Provides utility methods for collections             |
+| Inheritance     | Parent interface of List, Set, Queue        | Final class with static methods                      |
+| Object Creation | Cannot be instantiated directly             | Cannot be instantiated (private constructor)         |
+| Methods         | `add()`, `remove()`, `size()`, `iterator()` | `sort()`, `reverse()`, `shuffle()`, `binarySearch()` |
