@@ -167,3 +167,115 @@ This is a very comprehensive Spring Security roadmap. It covers everything from 
 **JSON Web Token Auth Process**
 
 ![User Management](/img/jwt-security-flow.jpeg)
+
+![JWT-Token-Validation](/img/jwt-token-validation.png)
+
+### CORS
+
+Cross-Origin Resource Sharing (CORS) is a browser security mechanism that controls whether a web application running on one origin can access resources from another origin. An origin is defined by the combination of:
+
+- Protocol (HTTP/HTTPS)
+- Domain (Hostname)
+- Port
+
+![CORS](/img/cors-process.png)
+
+### CSRF
+
+Cross-Site Request Forgery (CSRF) is an attack in which a malicious website tricks a user's browser into sending an unauthorized request to another website where the user is already authenticated.
+
+Unlike CORS, CSRF is not a browser restriction. It is an attack that exploits automatically sent credentials such as session cookies.
+
+![CSRF](/img/csrf-process.png)
+
+| Feature          | CORS                                   | CSRF                                 |
+| ---------------- | -------------------------------------- | ------------------------------------ |
+| Full Form        | Cross-Origin Resource Sharing          | Cross-Site Request Forgery           |
+| Purpose          | Controls cross-origin resource sharing | Prevents forged requests             |
+| Nature           | Browser security policy                | Security attack                      |
+| Protects Against | Unauthorized cross-origin access       | Unauthorized state-changing requests |
+| Enforced By      | Browser                                | Server                               |
+| Uses Tokens      | No                                     | Yes (typically)                      |
+| Uses Cookies     | Optional                               | Usually exploits cookies             |
+| Common in        | SPA + REST APIs                        | Session-based web applications       |
+| Spring Security  | `http.cors()`                          | `http.csrf()`                        |
+
+### Method Level Security
+
+Method Level Security allows you to apply authorization rules directly to Java methods using annotations. Instead of protecting URLs like:
+
+```bash
+GET /api/users/**
+```
+
+We protect methods like:
+
+```bash
+public User getUser(Long id)
+```
+
+Using annotations such as:
+
+```bash
+@PreAuthorize("hasRole('ADMIN')")
+```
+
+Without Method Security
+
+```bash
+Client
+   │
+   ▼
+Security Filter
+   │
+   ▼
+Controller
+   │
+   ▼
+Service
+   │
+   ▼
+Repository
+```
+
+With Method Security
+
+```bash
+Client
+   │
+   ▼
+Security Filter
+   │
+   ▼
+Controller
+   │
+   ▼
+@PreAuthorize
+Service
+   │
+   ▼
+@PostAuthorize
+Repository
+```
+
+| Annotation       | Purpose                                      | Supports SpEL |
+| ---------------- | -------------------------------------------- | ------------- |
+| `@PreAuthorize`  | Checks authorization before method execution | Yes           |
+| `@PostAuthorize` | Checks authorization after method execution  | Yes           |
+| `@PreFilter`     | Filters method parameters before execution   | Yes           |
+| `@PostFilter`    | Filters returned collections after execution | Yes           |
+| `@Secured`       | Simple role-based authorization              | No            |
+| `@RolesAllowed`  | Java standard role-based authorization       | No            |
+
+> Spring Expression Language (SpEL)
+
+### OAuth 2.0
+
+OAuth 2.0 (Open Authorization 2.0) is an authorization framework that allows a user to grant a third-party application limited access to their resources without sharing their password. It is important to understand:
+
+- Authentication answers "Who are you?"
+- Authorization answers "What are you allowed to access?"
+
+> OAuth 2.0 primarily focuses on authorization, although it is commonly used together with OpenID Connect (OIDC) for authentication.
+
+![OAuth 2.0](/img/oauth2-flow.png)
