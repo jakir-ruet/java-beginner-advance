@@ -1,3 +1,15 @@
+### Overview
+
+This is a very comprehensive Spring Security roadmap. It covers everything from beginner concepts to enterprise authentication and authorization. If your goal is to become a Java backend developer or Spring Security expert, this curriculum is strong. Here's what you'll learn, organized by skill level:
+
+| Level            | Topics                                                                                     |
+| ---------------- | ------------------------------------------------------------------------------------------ |
+| **Beginner**     | Spring Security basics, Filters, Security Flow, Authentication, Basic Auth                 |
+| **Intermediate** | Custom Security Config, UserDetailsService, JDBC Authentication, Password Encoders, BCrypt |
+| **Advanced**     | Custom AuthenticationProvider, Session Management, HTTPS, Exception Handling, CSRF, CORS   |
+| **Professional** | JWT Authentication, Method-Level Security, Custom Filters, Roles & Authorities             |
+| **Expert**       | OAuth2, OpenID Connect, Keycloak, Spring Authorization Server, PKCE, MFA, Social Login     |
+
 ### Spring Boot Security with OWASP Compliance
 
 1. Project Setup & Dependencies
@@ -13,196 +25,145 @@
 11. Docker & Production Deployment
 12. Security Checklist & OWASP Compliance Matrix
 
-#### 1. Project Setup & Dependencies
+#### OWASP Top 10 Compliance Matrix
 
-##### 1.1. `pom.xml`
+| OWASP Risk                                            | Spring Boot Implementation                                                      |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------- |
+| A01:2021 – Broken Access Control                      | `@PreAuthorize`, `@PostAuthorize`, Role hierarchy, Custom `PermissionEvaluator` |
+| A02:2021 – Cryptographic Failures                     | `BCryptPasswordEncoder` (work factor 12), HTTPS enforcement, JWT signatures     |
+| A03:2021 – Injection                                  | JPA parameterized queries, Input validation (`@Valid`), Output encoding         |
+| A04:2021 – Insecure Design                            | Defense in depth, Security by default, Principle of least privilege             |
+| A05:2021 – Security Misconfiguration                  | Secure defaults, Security headers, CSRF protection, No stack traces             |
+| A06:2021 – Vulnerable and Outdated Components         | OWASP Dependency-Check, Regular updates, Vulnerability scanning                 |
+| A07:2021 – Identification and Authentication Failures | MFA support, Password policies, Account lockout, Session fixation protection    |
+| A08:2021 – Software and Data Integrity Failures       | Refresh token rotation, Audit logging, Signed JWT tokens                        |
+| A09:2021 – Security Logging and Monitoring Failures   | Comprehensive audit logs, Rate limiting alerts, Failed login tracking           |
+| A10:2021 – Server-Side Request Forgery (SSRF)         | Input validation, URL whitelisting, Network segmentation                        |
 
-##### 1.2. `application.yml`
+#### Major concepts covered
 
-##### 1.3. `db-migration.sql`
+1. Spring Security Architecture
+   - Security Filter Chain
+   - Servlet Filters
+   - Authentication flow
+   - Authorization flow
+   - SecurityContext
+   - Authentication object
 
-#### 2. Database Design & Entities
+2. User Management
+	- InMemoryUserDetailsManager
+	- JdbcUserDetailsManager
+	- Custom UserDetailsService
+	- Registration APIs
+	- MySQL integration
 
-##### 2.1. `db-migration.java` - (OWASP Compliant)
+3. Password Security
+	- BCrypt
+	- PasswordEncoder
+	- Hashing
+	- Encoding vs Encryption
+	- Rainbow table attacks
+	- Brute force attacks
 
-##### 2.2. `Role.java` - Role Entity
+4. Authentication
+	-	HTTP Basic
+	- Form Login
+	- Custom AuthenticationProvider
+	- AuthenticationManager
+	- JWT Authentication
 
-##### 2.3. `Permission.java` - Permission Entity
+5. Authorization
+	- Roles
+	- Authorities
+	- Method Security
+	- @PreAuthorize
+	- @PostAuthorize
+	- @PreFilter
+	- @PostFilter
 
-##### 2.4. `AuditLog.java`- Audit Log Entity
+6. Security Attacks
+	- CSRF
+	- CORS
+	- Session Fixation
+	- Session Hijacking
+	- HTTPS
+	- Concurrent Sessions
 
-#### 3. Security Configuration (OWASP Compliant)
+7. Customization
+	- Custom Filters
+	- AuthenticationEntryPoint
+	- AccessDeniedHandler
+	- Authentication Events
+	- Environment-specific configurations
 
-##### 3.1. `SecurityConfig` - Main Security Configuration
+8. JWT
+	- JWT structure
+	- JWT generation
+	- JWT validation
+	- Expiration
+	- Stateless authentication
 
-##### 3.2. `JwtAuthenticationEntryPoint` - JWT Authentication Entry Point
+9. OAuth2 - The course explains almost every OAuth2 flow:
+	- Authorization Code
+	- PKCE
+	- Client Credentials
+	- Refresh Token
+	- Password Grant (legacy)
+	- Implicit Grant (legacy)
 
-##### 3.3. `CustomAccessDeniedHandler` - Custom Access Denied Handler
+10. OpenID Connect
+	- Identity layer over OAuth2
+	- User authentication
+	- ID Tokens
 
-#### 4. JWT Implementation
+#### Servlet and Filter
 
-##### 4.1. `JwtService` - JWT Service
+**Servlet** A Servlet is a Java server-side component that receives HTTP requests, executes business logic, and generates HTTP responses for the client.
 
-##### 4.2. `JwtAuthenticationFilter` - JWT Authentication Filter
+**Filter** A Filter is a Java component that intercepts HTTP requests and responses before or after they reach a Servlet, allowing cross-cutting tasks such as authentication, authorization, logging, validation, and request/response modification.
 
-##### 4.3. `UserPrincipal` - User Principal
+![Servlet and Filter](/img/servlet-filters.png)
 
-#### 5. Authentication Service
+**Easy Comparison**
 
-##### 5.1. `AuthenticationService` - Authentication Service Implementation
+| Servlet                        | Filter                                 |
+| ------------------------------ | -------------------------------------- |
+| Handles business logic         | Intercepts requests and responses      |
+| Processes HTTP requests        | Performs pre/post processing           |
+| Generates HTTP responses       | Does not generate business responses   |
+| Endpoint of the request        | Executes before and/or after a Servlet |
+| Example: `doGet()`, `doPost()` | Example: `doFilter()`                  |
 
-##### 5.2. `PasswordValidator` - Password Validator
+**Spring Security Internal Flow**
 
-##### 5.3. `LoginRequest` - Data Transfer Object (DTOs)
+![Spring Security Internal Flow](/img/sb-security-flow.png)
 
-#### 6. Authorization & RBAC
+**Spring Security Filters** - A chain of Spring Security filters intercepts every incoming HTTP request. The filters determine whether authentication or authorization is required and perform tasks such as JWT validation, session management, CSRF protection, and request processing before the request reaches the application.
 
-##### 6.1. `CustomPermissionEvaluator` - Custom Permission Evaluator
+**Authentication** - The Authentication object represents the current user's identity and authentication status. Filters such as UsernamePasswordAuthenticationFilter or a custom JwtAuthenticationFilter create this object from the incoming request and pass it to the authentication process.
 
-##### 6.2. `UserManagementController` - Method-Level Security Examples
+**AuthenticationManager** - The AuthenticationManager coordinates the authentication process. It receives the Authentication object from the filter and delegates authentication to the appropriate AuthenticationProvider.
 
-##### 6.3. `RoleHierarchyConfig` - Role Hierarchy Configuration
+**AuthenticationProvider** - An AuthenticationProvider contains the core authentication logic. It validates the user's credentials, loads user information, verifies the password, and returns an authenticated Authentication object when validation succeeds.
 
-#### 7. Security Headers & CSRF Protection
+**UserDetailsService/UserDetailsManager** UserDetailsService loads user information such as username, password, roles, and account status from the database or another data source.
 
-##### 7.1. `SecurityHeadersConfig` - Security Headers Configuration
+> UserDetailsManager extends UserDetailsService by providing additional operations to create, update, and delete user accounts.
 
-##### 7.2. `CsrfConfig` - CSRF Protection Configuration
+**PasswordEncoder** - PasswordEncoder securely hashes passwords before they are stored and verifies a user's raw password against the encoded password during authentication. This ensures that plain-text passwords are never stored.
 
-##### 7.3. `CsrfController` - CSRF Token Endpoint (for SPA clients)
+**SecurityContext** - After successful authentication, the authenticated Authentication object is stored in the SecurityContext. Managed by the SecurityContextHolder, it makes the authenticated user's security information available throughout the current request and, depending on the security configuration, across subsequent requests.
 
-#### 8. Rate Limiting & Brute Force Protection
+**Security sequence Flow**
 
-##### 8.1. `RateLimitingFilter` - Rate Limiting Filter
+![Security sequence Flow](/img/security-sequence-flow.png)
 
-##### 8.2. `RateLimiterService` - Rate Limiter Service (with Redis)
+![Security sequence Flow](/img/security-sequence-flow1.png)
 
-##### 8.3. `RedisConfig` - Redis Configuration
+**User Management**
 
-#### 9. Audit Logging & Monitoring
+![User Management](/img/user-management.png)
 
-##### 9.1. `AuditLogFilter` - Audit Log Filter
+**JSON Web Token Auth Process**
 
-##### 9.2. `AuditService` - Audit Service
-
-#### 10. Testing Security
-
-##### 10.1. `TestSecurityConfig` - Security Test Configuration
-
-##### 10.2. `AuthenticationControllerTest` - Integration Tests
-
-##### 10.3. `SecurityHeadersTest` - Security Headers Test
-
-#### 11. Docker & Production Deployment
-
-##### 11.1. `Dockerfile` - Dockerfile
-
-##### 11.2. `Docker-Compose` - Docker Compose
-
-##### 11.3. `nginx.conf` - Nginx Configuration (with HTTPS)
-
-##### 11.4. `application-production` - Production Profile
-
-#### 12. Security Checklist & OWASP Compliance Matrix
-
-##### 12.1. OWASP Top 10 Compliance Matrix
-
-| OWASP Risk                                            | Spring Boot Implementation                                                      | Status |
-| ----------------------------------------------------- | ------------------------------------------------------------------------------- | ------ |
-| A01:2021 – Broken Access Control                      | `@PreAuthorize`, `@PostAuthorize`, Role hierarchy, Custom `PermissionEvaluator` | Ok     |
-| A02:2021 – Cryptographic Failures                     | `BCryptPasswordEncoder` (work factor 12), HTTPS enforcement, JWT signatures     | Ok     |
-| A03:2021 – Injection                                  | JPA parameterized queries, Input validation (`@Valid`), Output encoding         | Ok     |
-| A04:2021 – Insecure Design                            | Defense in depth, Security by default, Principle of least privilege             | Ok     |
-| A05:2021 – Security Misconfiguration                  | Secure defaults, Security headers, CSRF protection, No stack traces             | Ok     |
-| A06:2021 – Vulnerable and Outdated Components         | OWASP Dependency-Check, Regular updates, Vulnerability scanning                 | Ok     |
-| A07:2021 – Identification and Authentication Failures | MFA support, Password policies, Account lockout, Session fixation protection    | Ok     |
-| A08:2021 – Software and Data Integrity Failures       | Refresh token rotation, Audit logging, Signed JWT tokens                        | Ok     |
-| A09:2021 – Security Logging and Monitoring Failures   | Comprehensive audit logs, Rate limiting alerts, Failed login tracking           | Ok     |
-| A10:2021 – Server-Side Request Forgery (SSRF)         | Input validation, URL whitelisting, Network segmentation                        | Ok     |
-
-##### 12.2. Security Checklist
-
-```bash
-# Final Security Checklist - Verify all items before production deployment
-
-Authentication & Password Security:
-- Passwords hashed with BCrypt (work factor 12)
-- Password complexity enforced (12+ chars, mixed case, numbers, special)
-- Account lockout after 5 failed attempts
-- Password history check (prevents reuse)
-- Password expiry (90 days)
-- MFA/2FA available
-- "Remember Me" disabled or properly secured
-- Session fixation protection enabled
-- Session timeout configured (30 minutes)
-
-Authorization:
-- Role-based access control implemented
-- Method-level security with @PreAuthorize
-- Principle of least privilege applied
-- Permission evaluator for fine-grained control
-- Role hierarchy configured
-- All admin endpoints protected
-- Audit logging for sensitive operations
-
-Data Protection:
-- HTTPS enforced in production
-- HSTS enabled with preload
-- CSRF protection for state-changing operations
-- SQL injection prevention (JPA/Hibernate)
-- XSS protection (CSP headers, output encoding)
-- Sensitive data encrypted at rest
-- No sensitive data in logs
-
-Security Headers:
-- Content-Security-Policy configured
-- X-Frame-Options: DENY
-- X-Content-Type-Options: nosniff
-- X-XSS-Protection: 1; mode=block
-- Referrer-Policy: strict-origin-when-cross-origin
-- Permissions-Policy: geolocation=(), microphone=(), camera=()
-- Cache-Control: no-cache, no-store
-
-Rate Limiting & DoS Protection:
-- Login endpoint: 5 attempts per 15 minutes
-- Registration: 3 attempts per hour
-- Password reset: 3 attempts per hour
-- API endpoints: 1000 requests per hour
-- Redis-based rate limiting
-
-Logging & Monitoring:
-- Audit logs for all security events
-- Failed login attempts logged
-- Successful logins logged
-- Password changes logged
-- Admin actions logged
-- Logs rotated and retained for 30+ days
-- No passwords/tokens in logs
-
-Infrastructure Security:
-- Non-root user in Docker container
-- Network segmentation (database not publicly accessible)
-- Secrets managed via environment variables
-- Regular security updates
-- Vulnerability scanning (OWASP Dependency-Check)
-- Health checks configured
-- Readiness/Liveness probes
-
-Testing:
-- Unit tests for security logic
-- Integration tests for authentication flow
-- Security header tests
-- Rate limiting tests
-- Penetration testing performed
-- OWASP ZAP scan completed
-
-Production Readiness:
-- Debug mode disabled
-- Actuator endpoints secured/restricted
-- Error messages sanitized (no stack traces)
-- Database passwords strong and rotated
-- JWT secret key strong and stored securely
-- SSL/TLS certificates valid and up-to-date
-- Backup and disaster recovery tested
-- Incident response plan documented
-```
+![User Management](/img/jwt-security-flow.jpeg)
