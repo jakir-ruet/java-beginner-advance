@@ -11,6 +11,10 @@
 /07-advanced/07-spring-security/handson-lab/security-configuration-app/.mvn
 /07-advanced/07-spring-security/handson-lab/security-configuration-app/target
 
+/07-advanced/07-spring-security/handson-lab/user-management-app/.idea
+/07-advanced/07-spring-security/handson-lab/user-management-app/.mvn
+/07-advanced/07-spring-security/handson-lab/user-management-app/target
+
 # =================== SOLID Principles ===================
 /08-solid-principles/payment-system/.mvn
 /08-solid-principles/payment-system/target

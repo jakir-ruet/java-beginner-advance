@@ -1,12 +1,12 @@
-package com.jakirbd.security_configuration_app.controller;
+package com.jakirbd.user_management_app.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class LoanController {
-    @GetMapping("/myLoan")
-    public String getLoanDetails() {
+public class NoticeController {
+    @GetMapping("/notice")
+    public String getNoticeDetails() {
         return "Loan Details";
     }
 }

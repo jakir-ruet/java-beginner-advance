@@ -1,0 +1,28 @@
+spring:
+  # Application Configuration
+  application:
+    name: user-management-app
+
+  # ===============================================
+  # Oracle Database
+  # ===============================================
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@//localhost:1521/FREEPDB1
+    username: JDBC_AUTH
+    password: Sql054003
+
+# User and Security Configuration
+# security:
+#   user:
+#     name: Jakir
+#     password: Sb@054003
+
+# Server Configuration
+server:
+  port: 8085
+
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework.jdbc.core: DEBUG
