@@ -15,6 +15,75 @@ Java SE 21 is a Long-Term Support (LTS) release of Java. It is one of the most i
 - Structured Concurrency
 - Scoped Values
 
+### JDK, JRE, and JVM
+
+These are the three main components of the Java platform. They have different roles:
+
+| Feature           | JDK (Java Development Kit)    | JRE (Java Runtime Environment) | JVM (Java Virtual Machine) |
+| ----------------- | ----------------------------- | ------------------------------ | -------------------------- |
+| Purpose           | Develop and run Java programs | Run Java programs              | Execute Java bytecode      |
+| Contains          | JRE + development tools       | JVM + libraries                | Execution engine only      |
+| Used by           | Developers                    | End users                      | Both JDK and JRE           |
+| Includes Compiler | Yes (`javac`)                 | No                             | No                         |
+| Includes JVM      | Yes                           | Yes                            | Itself                     |
+
+**Relationship**
+
+![JDK-JRE-JVM](/img/jdk-jre-jvm.png)
+
+**Workflow**
+
+```bash
+Java Source Code (.java)
+          │
+      javac (JDK)
+          │
+          ▼
+   Bytecode (.class)
+          │
+          ▼
+      JVM (inside JRE)
+          │
+          ▼
+		Machine Code
+          │
+          ▼
+      Program Output
+```
+
+**Easy Analogy**
+
+- JDK = A complete workshop (tools + machine + operator).
+- JRE = The machine with everything needed to operate it.
+- JVM = The engine inside the machine that actually performs the work.
+
+### Java Version After & Before 9
+
+![Java Version After & Before 9](/img/java-dir-structure.png)
+
+### Just-In-Time Compiler (JIT)
+
+It's a component of the JVM (Java Virtual Machine) that improves the performance of Java applications by converting frequently executed **bytecode into native machine code** at runtime.
+
+Instead of interpreting the same bytecode repeatedly, the JIT compiler compiles it **once into machine code and stores it in memory**. Future executions use this compiled code, making the application much faster.
+
+**Advantages of JIT**
+
+- Faster execution after the application warms up.
+- Optimizes frequently used ("hot") code.
+- Reduces repeated bytecode interpretation.
+- Performs runtime optimizations based on actual execution patterns.
+- Helps Java achieve performance close to compiled languages such as C and C++ for long-running applications.
+
+**JIT vs Interpreter**
+
+| Interpreter                    | JIT Compiler                               |
+| ------------------------------ | ------------------------------------------ |
+| Executes bytecode line by line | Compiles bytecode into native machine code |
+| Slower for repeated execution  | Faster after compilation                   |
+| Starts quickly                 | Takes some time to compile hot code        |
+| No optimization                | Applies runtime optimizations              |
+
 #### Literals
 
 These are fixed values that appear directly in the code. They don't change.
