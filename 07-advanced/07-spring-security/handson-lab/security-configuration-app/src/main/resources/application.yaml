@@ -1,0 +1,14 @@
+spring:
+  # Application Configuration
+  application:
+    name: security-configuration-app
+
+  # User and Security Configuration
+  security:
+    user:
+      name: Jakir
+      password: Sb@054003
+
+# Server and Port Configuration
+server:
+  port: 8085

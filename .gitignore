@@ -1,15 +1,25 @@
 /.vscode
 /.idea
+/.mvn
 /.DS_Store*
-
-/08-solid-principles/payment-system/.mvn
-/08-solid-principles/payment-system/target
 
 /01-basic/01-hello-world/Main.class
 /01-basic/02-primitive/Main.class
+
+# =================== Spring Security ===================
+/07-advanced/07-spring-security/handson-lab/security-configuration-app/.idea
+/07-advanced/07-spring-security/handson-lab/security-configuration-app/.mvn
+/07-advanced/07-spring-security/handson-lab/security-configuration-app/target
+
+# =================== SOLID Principles ===================
+/08-solid-principles/payment-system/.mvn
+/08-solid-principles/payment-system/target
+
+# =================== Practice ===================
 /09-practice/empmanagement/.github
 /09-practice/empmanagement/.mvn
 /09-practice/empmanagement/.vscode
 /09-practice/empmanagement/.idea
-/07-advanced/07-spring-security/target
+
+
 
