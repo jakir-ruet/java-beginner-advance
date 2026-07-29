@@ -1,4 +1,4 @@
-package com.jakir.security_configuration_app.config;
+package com.jakirbd.security_configuration_app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

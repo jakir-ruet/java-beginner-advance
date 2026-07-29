@@ -1,4 +1,4 @@
-package com.jakir.security_configuration_app;
+package com.jakirbd.security_configuration_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
