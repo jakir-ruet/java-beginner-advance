@@ -19,6 +19,12 @@
 /07-advanced/07-spring-security/handson-lab/user-management-rest-api/.mvn
 /07-advanced/07-spring-security/handson-lab/user-management-rest-api/target
 
+/07-advanced/07-spring-security/handson-lab/cors-csrf-backend-app/.idea
+/07-advanced/07-spring-security/handson-lab/cors-csrf-backend-app/.mvn
+/07-advanced/07-spring-security/handson-lab/cors-csrf-backend-app/target
+
+/07-advanced/07-spring-security/handson-lab/cors-csrf-frontend-app/.vscode
+
 # =================== SOLID Principles ===================
 /08-solid-principles/payment-system/.mvn
 /08-solid-principles/payment-system/target

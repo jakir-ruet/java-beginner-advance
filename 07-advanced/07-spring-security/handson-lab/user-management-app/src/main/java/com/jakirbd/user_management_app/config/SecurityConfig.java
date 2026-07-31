@@ -40,23 +40,23 @@ public class SecurityConfig {
     }
 
 // ==================== In Memory User Details Manager Configuration ====================
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//
-//        UserDetails admin = User.withDefaultPasswordEncoder()
-//                .username("admin")
-//                .password("12345")
-//                .authorities("admin")
-//                .build();
-//
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("12345")
-//                .authorities("read")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(admin, user);
-//    }
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+
+        UserDetails admin = User.withDefaultPasswordEncoder()
+                .username("admin")
+                .password("12345")
+                .authorities("admin")
+                .build();
+
+        UserDetails user = User.withDefaultPasswordEncoder()
+                .username("user")
+                .password("12345")
+                .authorities("read")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin, user);
+    }
 
 // ==================== JDBC Authentication Configuration ====================
     @Bean

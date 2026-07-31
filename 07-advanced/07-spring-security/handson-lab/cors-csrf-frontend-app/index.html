@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Test from Browser</title>
+    <meta name="description" content="LiteAdmin - Bootstrap Admin Template">
+    <meta name="keywords" content="admin, dashboard, bootstrap">
+
+    <!-- Favicons -->
+    <link href="img/favicon.png" rel="icon">
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+</head>
+<body>
+
+    <button onclick="callApi()">Call Backend</button>
+    <button onclick="callSecureApi()">Call Secure Backend</button>
+
+    <script>
+        function callApi() {
+            fetch("http://localhost:8085/contact", {
+                method: "GET",
+                credentials: "include"
+            })
+            .then(res => res.text())
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
+        }
+
+        function callSecureApi() {
+
+            fetch("http://localhost:8085/myAccount", {
+                method: "GET",
+                headers: {
+                    "Authorization": "Basic " + btoa("admin:12345")
+                }
+            })
+            .then(res => res.text())
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
+        }
+    </script>
+
+</body>
+</html>

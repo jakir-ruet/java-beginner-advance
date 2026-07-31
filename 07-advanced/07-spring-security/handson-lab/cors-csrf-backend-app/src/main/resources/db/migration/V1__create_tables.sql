@@ -1,0 +1,52 @@
+CREATE TABLE USERS (
+    USERNAME NVARCHAR2(128) PRIMARY KEY,
+    PASSWORD NVARCHAR2(500) NOT NULL,
+    ENABLED CHAR(1)
+);
+
+
+CREATE TABLE AUTHORITIES (
+    USERNAME NVARCHAR2(128),
+    AUTHORITY NVARCHAR2(128),
+
+    CONSTRAINT AUTHORITIES_PK
+     PRIMARY KEY(USERNAME, AUTHORITY),
+
+    CONSTRAINT AUTHORITIES_FK
+     FOREIGN KEY(USERNAME)
+         REFERENCES USERS(USERNAME)
+);
+
+-- Password 12345
+INSERT INTO USERS
+VALUES(
+          'admin',
+          '$2a$12$M5BtUfC1FltmsQxKGGEYsOTPValBBXWIgo6GC2Df0rvbPXRblAXZu',
+          'Y'
+      );
+
+
+INSERT INTO USERS
+VALUES(
+          'jakir',
+          '$2a$12$M5BtUfC1FltmsQxKGGEYsOTPValBBXWIgo6GC2Df0rvbPXRblAXZu',
+          'Y'
+      );
+
+INSERT INTO AUTHORITIES
+VALUES(
+          'admin',
+          'ROLE_ADMIN'
+      );
+
+
+INSERT INTO AUTHORITIES
+VALUES(
+          'jakir',
+          'ROLE_USER'
+      );
+
+COMMIT;
+
+SELECT username, password, enabled
+FROM users;
