@@ -18,3 +18,4 @@ public class PublicController {
         return "Notice page - public access";
     }
 }
+

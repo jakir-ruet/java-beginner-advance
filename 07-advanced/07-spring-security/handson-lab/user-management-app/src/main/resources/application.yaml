@@ -9,7 +9,7 @@ spring:
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
     url: jdbc:oracle:thin:@//localhost:1521/FREEPDB1
-    username: JDBC_AUTH
+    username: INMEM_AUTH
     password: Sql054003
 
 # User and Security Configuration

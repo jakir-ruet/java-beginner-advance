@@ -7,6 +7,7 @@
 /01-basic/02-primitive/Main.class
 
 # =================== Spring Security ===================
+/07-advanced/07-spring-security/target
 /07-advanced/07-spring-security/handson-lab/security-configuration-app/.idea
 /07-advanced/07-spring-security/handson-lab/security-configuration-app/.mvn
 /07-advanced/07-spring-security/handson-lab/security-configuration-app/target
