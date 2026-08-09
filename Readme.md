@@ -17,6 +17,28 @@ A programming paradigm is a philosophical and conceptual framework for designing
 7. Generic Programming
 8. Event-Driven Programming
 
+#### Java Is Multi-Paradigm
+
+A modern Java application can combine several paradigms.
+
+```bash
+                    Java Application
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+       OOP              Functional       Concurrent
+          │                │                │
+      Services          Streams        CompletableFuture
+      Classes           Lambdas        Executors
+      Interfaces
+          │
+          └───────────────┬────────────────┘
+                          │
+                    Declarative
+                          │
+                    Spring / SQL
+```
+
 ### Java SE 21?
 
 Java SE 21 is a Long-Term Support (LTS) release of Java. It is one of the most important versions because many enterprise applications, cloud-native systems, banking software, backend APIs, Android tools, and big-data platforms rely on Java. Java SE 21 introduces important modern features like:
