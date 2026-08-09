@@ -4,6 +4,19 @@
 
 Java is a high-level, general-purpose, memory-safe, object-oriented programming language. It is intended to let programmers write once, run anywhere, meaning that compiled Java code can run on all platforms that support Java without the need to recompile.
 
+### Programming Paradigm in Java
+
+A programming paradigm is a philosophical and conceptual framework for designing and implementing software, which dictates the structure, syntax, and semantics of the programming language, as well as the problem-solving approach of the developer. The major paradigms relevant to Java are:
+
+1. Imperative Programming
+2. Procedural Programming
+3. Object-Oriented Programming (OOP)
+4. Declarative Programming
+5. Functional Programming
+6. Concurrent Programming
+7. Generic Programming
+8. Event-Driven Programming
+
 ### Java SE 21?
 
 Java SE 21 is a Long-Term Support (LTS) release of Java. It is one of the most important versions because many enterprise applications, cloud-native systems, banking software, backend APIs, Android tools, and big-data platforms rely on Java. Java SE 21 introduces important modern features like:
